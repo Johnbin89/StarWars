@@ -8,12 +8,12 @@ def generate_filename(self, filename):
     
 class StarWarsCharacter(models.Model):
     name = models.CharField(max_length=50, db_index=True)
-    height = models.IntegerField()
-    mass = models.IntegerField()
+    height = models.IntegerField(null=True)
+    mass = models.DecimalField(max_digits=6, decimal_places=1,null=True)
     hair_color = models.CharField(max_length=50)
     skin_color = models.CharField(max_length=50)
     eye_color = models.CharField(max_length=50)
-    birth_year = models.DecimalField() #https://starwars.fandom.com/wiki/Time
+    birth_year = models.DecimalField(max_digits=6, decimal_places=1, null=True) #https://starwars.fandom.com/wiki/Time
     gender_choices = [
         ('male', 'Reef'),
         ('female', 'Wall'),
