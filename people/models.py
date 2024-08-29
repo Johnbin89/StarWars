@@ -23,3 +23,6 @@ class StarWarsCharacter(models.Model):
     home_world_name = models.CharField(max_length=50, db_index=True)
     image = models.ImageField(upload_to=generate_filename, verbose_name="Character Image", default=DEFUALT_IMAGE)
     
+    def __str__(self):
+        return f'{self.name}'
+    
