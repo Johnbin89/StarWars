@@ -1,6 +1,8 @@
 from people.models import StarWarsCharacter
 from people.serializers import StarWarsCharacterSerializer
 from rest_framework import viewsets, permissions, filters
+from rest_framework.decorators import action
+from rest_framework.response import Response
 #from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -30,13 +32,8 @@ class StarWarsCharacterViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = StarWarsCharacter.objects.filter(home_world_name__icontains=planet).all()
         return queryset
     
-class FavoritesViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    A ViewSet for viewing the favorites Characters 
-    for current user.
-    """
-    serializer_class = StarWarsCharacterSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return self.request.user.favorites.all()
+    @action(detail=False, permission_classes=[permissions.IsAuthenticated])
+    def favorites(self, request):
+        favorite_characters = request.user.favorites.all()
+        serializer = self.get_serializer(favorite_characters, many=True)
+        return Response(serializer.data)

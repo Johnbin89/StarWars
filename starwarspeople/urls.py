@@ -20,13 +20,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from people.views import StarWarsCharacterViewSet, FavoritesViewSet
+from people.views import StarWarsCharacterViewSet
 from accounts.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'people', StarWarsCharacterViewSet, basename='people')
 router.register(r'users', UserViewSet, basename='user')
-router.register(r'favorites', FavoritesViewSet, basename='favorites')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
