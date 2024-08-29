@@ -15,8 +15,8 @@ class StarWarsCharacter(models.Model):
     eye_color = models.CharField(max_length=50)
     birth_year = models.DecimalField(max_digits=6, decimal_places=1, null=True) #https://starwars.fandom.com/wiki/Time
     gender_choices = [
-        ('male', 'Reef'),
-        ('female', 'Wall'),
+        ('male', 'male'),
+        ('female', 'female'),
         ('n/a', 'n/a'),
     ]
     gender = models.CharField(max_length=30, choices=gender_choices)
