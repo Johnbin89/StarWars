@@ -21,14 +21,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from people.views import StarWarsCharacterViewSet
-from accounts.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'people', StarWarsCharacterViewSet, basename='people')
-router.register(r'users', UserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include('accounts.urls'), name="authentication"),
     path('', include(router.urls)),
     path("api-auth/logout/", LogoutView.as_view(), name="logout"),
     path('api-auth/', include('rest_framework.urls')),

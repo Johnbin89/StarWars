@@ -51,11 +51,13 @@ INSTALLED_APPS = [
     'rest_framework'
 ]
 
+TEST_AUTH_CLASSES = ('rest_framework.authentication.BasicAuthentication', 
+                     'rest_framework.authentication.SessionAuthentication',
+                     )
+JWT_AUTH_CLASS = ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': JWT_AUTH_CLASS if not DEBUG else TEST_AUTH_CLASSES,
 }
 
 if not DEBUG:

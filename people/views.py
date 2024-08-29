@@ -3,7 +3,6 @@ from people.serializers import StarWarsCharacterSerializer
 from rest_framework import viewsets, permissions, filters, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-# from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 # Create your views here.
@@ -55,14 +54,16 @@ class StarWarsCharacterViewSet(viewsets.ReadOnlyModelViewSet):
                     "message": "Can not add characters already in Favorites",
                     "characters":union_set.values_list(),
                     "status": status.HTTP_400_BAD_REQUEST,
-                }
+                },
+                status=status.HTTP_400_BAD_REQUEST
             )            
         if len(favorites_ids) != found_starwars_characters.count():
             return Response(
                 {
                     "message": "Not Found all requested Characters",
                     "status": status.HTTP_400_BAD_REQUEST,
-                }
+                },
+                status=status.HTTP_400_BAD_REQUEST
             )
         request.user.favorites.add(*found_starwars_characters)
         return Response(
@@ -71,5 +72,6 @@ class StarWarsCharacterViewSet(viewsets.ReadOnlyModelViewSet):
                 "status": status.HTTP_200_OK,
                 "characters": found_starwars_characters.values_list(),
                 "added_count": found_starwars_characters.count(),
-            }
+            },
+            status=status.HTTP_200_OK
         )
