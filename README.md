@@ -7,7 +7,13 @@
 _In development mode for convenience you can employ BasicAuth to test authenticated routes. A local SQLite DB will be created if DATABASE_URL is not defined. Development mode runs on `:8002` port._  
 
 **Live Demo**: Hosted in a DigitalOcean VM with a cloud Postgres instance in aiven.io.  
-Available on: `https://starwars.jbin.me/api/`
+Available on: `https://starwars.jbin.me/api/`  
+  
+  
+Live Demo Example:
+```shell
+https://starwars.jbin.me/api/people/?planet=Tatooine&ordering=-mass
+```  
 
 ## Available APIs
 * #### All Starwars Characters: [GET] `people/`
