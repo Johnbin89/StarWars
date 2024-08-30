@@ -27,8 +27,8 @@ router.register(r'people', StarWarsCharacterViewSet, basename='people')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('accounts.urls'), name="authentication"),
-    path('', include(router.urls)),
+    path('api/auth/', include('accounts.urls'), name="authentication"),
+    path('api/', include(router.urls)),
     path("api-auth/logout/", LogoutView.as_view(), name="logout"),
     path('api-auth/', include('rest_framework.urls')),
 ]
