@@ -14,8 +14,9 @@ class StarWarsCharacterViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = StarWarsCharacterSerializer
     # https://www.django-rest-framework.org/api-guide/filtering/#searchfilter
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    #filter.SearchFilter /?search=  (Redundant if getting queryparams in queryset. Maybe remove)
     search_fields = ["name", "home_world_name"]
-    ordering_fields = ["name", "mass", "height"]
+    ordering_fields = ["name", "mass", "height", "birth_year"]
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
