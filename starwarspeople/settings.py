@@ -147,8 +147,6 @@ STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
-
 MEDIA_URL = config('MEDIA_URL', default='/images/')
 MEDIA_ROOT = config('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'images'))
 
