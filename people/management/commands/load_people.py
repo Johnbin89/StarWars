@@ -14,7 +14,13 @@ class Command(BaseCommand):
                 people_list = json_response['results']
                 for character in people_list:
                     home_world_name = httpx.get(character['homeworld']).json()['name']
-                    birth_year = decimal.Decimal(character['birth_year'][:-3]) if character['birth_year'] != 'unknown' else None
+                    
+                    #Adjust for ABY. BBY periods (+, -) https://starwars.fandom.com/wiki/Time
+                    if (birth_year_str := character['birth_year'])[-3:] in  {'BBY', 'ABY'}:
+                        period = birth_year_str[-3:]
+                        birth_year = decimal.Decimal(birth_year_str[:-3]) if period == 'ABY' else decimal.Decimal(f'-{birth_year_str[:-3]}')
+                    else:
+                        birth_year = None #Keep NULL db entry for 'unknown'. 0 considered 0ABY
                     height = int(character['height']) if character['height'] != 'unknown' else None
                     mass = decimal.Decimal(character['mass'].replace(',' ,'')) if character['mass'] != 'unknown' else decimal.Decimal('0')
                     print(f'{character['name']}, {birth_year} ,{home_world_name}, height: {height}, mass = {mass}')
