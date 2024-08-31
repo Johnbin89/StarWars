@@ -3,7 +3,7 @@ from django.db import models
 DEFUALT_IMAGE = 'people/default.jpg'
 
 def generate_filename(self, filename):
-    url = f'people/{self.name}/{filename}'
+    url = f'people/{self.id}/{filename}'
     return url
     
 class StarWarsCharacter(models.Model):
