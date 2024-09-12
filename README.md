@@ -1,4 +1,4 @@
-# YourHero - StarWars
+# StarWars
 ## An API built with Django DRF to list / search / sort StarWars Characters
 
 * `Public` endpoint to `list, search, and order` the results of StarWars Characters.  
